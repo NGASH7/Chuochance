@@ -1,6 +1,5 @@
 .env
 # Django project
-/media/
 *.sqlite3
 
 # Python and others
