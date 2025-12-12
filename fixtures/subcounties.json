@@ -1,0 +1,52 @@
+[
+    {
+        "model": "applications.Subcounty",
+        "pk": 1,
+        "fields": {
+            "name": "Naivasha"
+        }
+    },
+    {
+        "model": "applications.Subcounty",
+        "pk": 2,
+        "fields": {
+            "name": "Nakuru"
+        }
+    },
+    {
+        "model": "applications.Subcounty",
+        "pk": 3,
+        "fields": {
+            "name": "Molo"
+        }
+    },
+    {
+        "model": "applications.Subcounty",
+        "pk": 4,
+        "fields": {
+            "name": "Kuresoi"
+        }
+    },
+    {
+        "model": "applications.Subcounty",
+        "pk": 5,
+        "fields": {
+            "name": "Gilgil"
+        }
+    },
+    {
+        "model": "applications.Subcounty",
+        "pk": 6,
+        "fields": {
+            "name": "Subukia"
+        }
+    },
+    {
+        "model": "applications.Subcounty",
+        "pk": 7,
+        "fields": {
+            "name": "Rongai"
+        }
+    }
+    
+]

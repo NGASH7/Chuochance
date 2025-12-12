@@ -1,0 +1,50 @@
+{% extends "layout/layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block section_header %}
+  <section class="section-header">    
+      <h1>Search results for ID: {{id_number}}</h1>
+      <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fas fa-home"></i> &nbsp; Home</a></div>
+        <div class="breadcrumb-item">Search</div>
+      </div>
+  </section>
+{% endblock section_header %}
+{% block content %}
+  <div class="card">
+      <div class="card-body">
+          <div class="table-responsive">
+              <table class="table" id="table">
+                <thead>
+                    <th>Year</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                </thead>
+                <tbody>
+                    {% for application in applications %}
+                    <tr>
+                        <td>{{application.period.year}}</td>
+                        <td>{{application.full_name}}</td>
+                        <td>{{application.award_status}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+{% endblock %}
+{% block customjs %}
+<script>
+    $('#table').dataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            { extend: 'copy', text: 'Copy to clipboard' },
+            { extend: 'excel', text: 'Export to Excel' },
+            { extend: 'csv', text: 'Export to CSV' },
+            { extend: 'pdf', text: 'Export to PDF' },
+            
+        ]
+    });
+</script>
+{% endblock customjs %}

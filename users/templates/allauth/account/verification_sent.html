@@ -1,0 +1,14 @@
+{% extends "layout/auth_layout.html" %}
+{% load static %}
+{% load i18n %}
+{% load account %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="card card-primary shadow">
+  <div class="card-header border-bottom"><h4>{% trans "Verify Your E-mail Address" %}</h4></div>
+  <div class="card-body">		
+		<p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
+	</div>
+</div>
+{% endblock %}

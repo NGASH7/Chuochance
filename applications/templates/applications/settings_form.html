@@ -1,0 +1,101 @@
+{% extends "layout/staff_layout.html" %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags widget_tweaks %}
+
+{% block section_header %}
+<section class="section-header">
+  <h1>Period Settings</h1>
+</section>
+{% endblock section_header %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"><h5>Current Period Settings</h5></div>
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Budget</th>
+                                <td>{{current_period.budget|intword}}</td>
+                            </tr>
+                            <tr>
+                                <th>Application Window Start</th>
+                                <td>{{current_period.start_date|naturaltime}}</td>
+                            </tr>
+                            <tr>
+                                <th>Application Window Ends</th>
+                                <td>{{current_period.end_date|naturaltime}}</td>
+                            </tr>
+                        </tbody>
+                    </table>                
+                    <h6>Edit Details <i class="fas fa-chevron-down"></i></h6>                
+                    {% comment %} <form method="POST"> {% endcomment %}
+                        {% comment %} {% csrf_token %} {% endcomment %}
+                        {% crispy period_form %}
+                    {% comment %} </form> {% endcomment %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"><h5>Allocation Settings (Per Candidate)</h5></div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <th>Level</th>
+                            <th>Amount Allocated</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            {% for level in levels  %}
+                            <tr>
+                                <td>{{level.name}}</td>
+                                <td>{{level.amount_allocated|intword|intcomma}}</td>
+                                <td>
+                                    <div class="buttons row">
+
+                                        <button type="button" class="update-level btn btn-sm btn-info" data-id="{% url 'update-level' level.pk %}">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="delete-level btn btn-sm btn-danger" data-id="{% url 'delete-level' level.pk %}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% comment %} <h6>Add New Allocation Below</h6> {% endcomment %}
+                    {% comment %} <form method="POST"> {% endcomment %}
+                        {% comment %} {% csrf_token %} {% endcomment %}
+                        {% comment %} {% crispy level_form %} {% endcomment %}
+                    {% comment %} </form> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
+{% block customjs %}
+<script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+<script>
+    $(document).ready(function (){
+        $('#settings-link').addClass('active');
+        $(".update-level").each(function () {
+            $(this).modalForm({
+              formURL: $(this).data('id')
+            });
+        });
+        $(".delete-level").each(function () {
+            $(this).modalForm({
+              formURL: $(this).data('id')
+            });
+        });
+    });
+</script>
+{% endblock customjs %}

@@ -1,0 +1,56 @@
+{% extends "layout/auth_layout.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<div class="card card-primary shadow">
+	<div class="card-header border-bottom"><h4>Let's Get Started</h4></div>
+	<div class="card-body">		
+		<p>Please enter your details below and we'll set up your account.</p>	
+
+		<form class="signup border-bottom pb-4" id="signup_form" method="post" action="{% url 'account_signup' %}">
+		  {% csrf_token %}
+		  {% crispy form %}
+		  {% if redirect_field_value %}
+		  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+		  {% endif %}
+		  <button class="btn btn-block btn-primary" type="submit">{% trans "Sign Up" %} </button>
+		</form>
+	</div>
+</div>
+<div class="mt-5 text-muted text-center">
+  Already have an account? Then <a href="{{ login_url }}">Sign In</a>
+</div>
+<script>
+  $('#sign_up_link').addClass('active');
+</script>
+{% endblock %}
+{% block customjs %}
+<script>
+    $('#eye').css('cursor', 'pointer');
+    // $('input[placeholder], textarea[placeholder]').placeholderLabel();
+    function showHidePwd() {
+        var input = document.getElementById("id_password1");
+        var input2 = document.getElementById("id_password2");
+        if (input.type === "password") {
+            input.type = "text";
+            document.getElementById("eye").className = "fas fa-eye";
+        } else {
+            input.type = "password";
+            document.getElementById("eye").className = "fas fa-eye-slash";
+        }
+
+        if (input2.type === "password") {
+            input2.type = "text";
+            document.getElementById("eye2").className = "fas fa-eye";
+        } else {
+            input2.type = "password";
+            document.getElementById("eye2").className = "fas fa-eye-slash";
+        }
+    }
+    // $('').select2();
+</script>
+{% endblock customjs %}

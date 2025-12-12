@@ -1,0 +1,226 @@
+[
+    {
+        "model": "applications.Ward",
+        "pk": 1,
+        "fields": {
+            "subcounty_id": 1,
+            "name": "Hell's gate"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 2,
+        "fields": {
+            "subcounty_id": 1,
+            "name": "Mai Mahiu"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 3,
+        "fields": {
+            "subcounty_id": 1,
+            "name": "Lake view"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 4,
+        "fields": {
+            "subcounty_id": 1,
+            "name": "Viwandani"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 5,
+        "fields": {
+            "subcounty_id": 2,
+            "name": "Menengai"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 6,
+        "fields": {
+            "subcounty_id": 2,
+            "name": "Nakuru East"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 7,
+        "fields": {
+            "subcounty_id": 2,
+            "name": "London"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 8,
+        "fields": {
+            "subcounty_id": 2,
+            "name": "Nakuru West"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 9,
+        "fields": {
+            "subcounty_id": 3,
+            "name": "Molo"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 10,
+        "fields": {
+            "subcounty_id": 3,
+            "name": "Elburgon"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 11,
+        "fields": {
+            "subcounty_id": 3,
+            "name": "Turi"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 12,
+        "fields": {
+            "subcounty_id": 3,
+            "name": "Marioshoni"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 13,
+        "fields": {
+            "subcounty_id": 3,
+            "name": "Njoro"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 14,
+        "fields": {
+            "subcounty_id": 4,
+            "name": "Keringet"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 15,
+        "fields": {
+            "subcounty_id": 4,
+            "name": "Kiptagich"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 16,
+        "fields": {
+            "subcounty_id": 4,
+            "name": "Sirikwa"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 17,
+        "fields": {
+            "subcounty_id": 5,
+            "name": "Elementaita"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 18,
+        "fields": {
+            "subcounty_id": 5,
+            "name": "Gilgil"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 19,
+        "fields": {
+            "subcounty_id": 5,
+            "name": "Malewa"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 20,
+        "fields": {
+            "subcounty_id": 5,
+            "name": "Mbaruk"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 21,
+        "fields": {
+            "subcounty_id": 6,
+            "name": "Subukia"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 22,
+        "fields": {
+            "subcounty_id": 6,
+            "name": "Kabazi"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 23,
+        "fields": {
+            "subcounty_id": 6,
+            "name": "Shrine"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 24,
+        "fields": {
+            "subcounty_id": 6,
+            "name": "Waseges"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 25,
+        "fields": {
+            "subcounty_id": 7,
+            "name": "Menengai West"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 26,
+        "fields": {
+            "subcounty_id": 7,
+            "name": "Solai"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 27,
+        "fields": {
+            "subcounty_id": 7,
+            "name": "Mosop"
+        }
+    },
+    {
+        "model": "applications.Ward",
+        "pk": 28,
+        "fields": {
+            "subcounty_id": 7,
+            "name": "Soin"
+        }
+    }
+]

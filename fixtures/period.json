@@ -1,0 +1,12 @@
+[
+    {
+        "model": "applications.Period",
+        "pk": 1,
+        "fields": {
+            "year": "2025",
+            "start_date": "2025-01-01 00:00:00",
+            "end_date": "2026-01-01 00:00:00",
+            "budget": 2000000
+        }
+    }
+]

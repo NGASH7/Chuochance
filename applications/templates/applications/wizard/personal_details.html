@@ -1,0 +1,43 @@
+{% extends "applications/wizard/layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block wizard_content %}
+    <div class="">
+      <div class="card card-primary">
+        <div class="card-header border-bottom"><h5>Let's start with some personal information</h5></div>
+        <div class="card-body">          
+          <form method="POST"  enctype="multipart/form-data" id="personalDetailsForm" data-wards-url="{% url 'ajax_load_wards' %}" novalidate>
+          {% csrf_token %}            
+            {{ wizard.management_form }}
+            {% if wizard.form.forms %}
+              {{ wizard.form.management_form }}
+              {% for form in wizard.form.forms %}
+                {% crispy form %}
+              {% endfor %}
+            {% else %}              
+              {% crispy wizard.form %}
+            {% endif %}
+          </form>                 
+        </div>
+      </div>
+    </div>
+{% endblock wizard_content %}
+{% block customjs %}
+<script src="{% static 'js/load_ajax_results.js' %}"></script>
+<script>
+  $(document).ready(function(){
+    $('#applications-link').addClass('active');
+    $('.disability_additional_details').hide();
+
+    $("#id_personal_details-disability_status").change(function() {
+      if(this.checked) {
+        $('.disability_additional_details').show();
+      }
+      else {
+        $('.disability_additional_details').hide();
+      }
+    });
+  });
+</script>
+ 
+{% endblock customjs %}

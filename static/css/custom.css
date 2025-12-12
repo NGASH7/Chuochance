@@ -1,0 +1,79 @@
+@font-face {
+  font-family: Maiandra GD;
+  src: url("/static/fonts/Maiandra GD Regular.ttf") format("truetype"); }
+/* BROWSER SELECTION COLOR */
+::selection {
+  color: #FFF;
+  background: #4b0082 !important;
+  /* WebKit/Blink Browsers */ }
+
+::-moz-selection {
+  background: #4b0082 !important;
+  /* Gecko Browsers */ }
+
+/* END OF BROWSER SELECTION COLOR */
+/* AUTH PAGE LAYOUT */
+.asteriskField {
+  color: red; }
+
+.login-form .input-group > .custom-select:not(:first-child), .login-form .input-group > .form-control:not(:first-child) {
+  border-top-left-radius: .25rem;
+  border-bottom-left-radius: .25rem; }
+
+label {
+  z-index: 20; }
+
+/* END OF AUTH PAGE LAYOUT */
+/* LINKS CUSTOMIZATION */
+.list-inline-item.active {
+  color: #4b0082;
+  font-weight: 600;
+  border-bottom: 2px solid #4b0082;
+  padding-bottom: 5px; }
+
+a:hover {
+  color: #4b0082; }
+
+/* END OF LINKS CUSTOMIZATION */
+/* SWEET ALERT CUSTOMIZATION */
+.swal2-styled.swal2-confirm {
+  background-color: #ffffff !important;
+  color: #000 !important; }
+
+body.swal2-toast-shown .swal2-container.swal2-bottom-left, body.swal2-toast-shown .swal2-container.swal2-bottom-start {
+  margin-bottom: 20px; }
+
+.swal2-popup.swal2-toast.swal2-show {
+  border: 1px solid #000 !important; }
+
+/* END OF SWEET ALERT */
+/* PHONE INPUT */
+.iti__flag {
+  background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/img/flags.png"); }
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {
+    background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/img/flags@2x.png"); } }
+.iti, .iti .phone_input {
+  width: 100%; }
+
+.iti--separate-dial-code .iti__selected-dial-code {
+  font-size: 14px; }
+
+/* END OF PHONE INPUT */
+/* INTRO JS */
+.introjs-tooltipReferenceLayer * {
+  font-family: 'Maiandra GD' !important; }
+
+/* FIELDSETS */
+fieldset {
+  min-width: 0;
+  padding: 20px;
+  margin-bottom: 2% !important;
+  border: 1px solid #cdd3d8 !important;
+  border-radius: 10px !important; }
+
+fieldset legend {
+  padding: 0 10px 0 10px !important; }
+
+/*# sourceMappingURL=custom.css.map */

@@ -1,0 +1,171 @@
+{% extends "layout/staff_layout.html" %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags widget_tweaks %}
+
+{% block section_header %}
+<section class="section-header">
+    <h1>{% if recommended %}Recommended {% elif successful %} Successful {% endif %}Applications for Year {{current_period.year}} </h1>
+    <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fas fa-home"></i> &nbsp; Home</a></div>
+        {% if recommended or successful %}
+            <div class="breadcrumb-item"><a href="{% url 'applications-list' %}"><i class="fas fa-tasks"></i> &nbsp; Applications</a></div>
+        {% endif %}
+        <div class="breadcrumb-item">{% if recommended %}Recommended{% elif successful %}Successful{% else %}Applications{% endif %}</div>
+    </div>
+</section>
+{% endblock section_header %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+
+        <div class="card-header-action">
+            {% if recommended or successful %}
+            <a href="{% url 'applications-list' %}" class="btn btn-primary">View All &nbsp; <i class="fas fa-chevron-right"></i></a>
+            {% else %}
+            <a href="{% url 'recommended-list' %}" class="btn btn-primary">View Recommended &nbsp; <i class="fas fa-chevron-right"></i></a>
+            {% endif %}
+            {% if user.is_superuser and not successful %}
+            <button data-url="{% url 'ajax_approve_applications' %}" class="btn btn-light" id="approve-link"><i class="fas fa-check"></i> &nbsp; Approve Selected &nbsp;</button>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card-body">
+        <form method="get" id="personalDetailsForm" data-wards-url="{% url 'ajax_load_wards' %}" novalidate>
+            {% crispy filter.form %}
+        </form>
+        <div class="table-responsive">
+            <table class="table" id="table">
+                <thead>
+                    {% if user.is_superuser and not successful  %}
+                    <th><input type="checkbox" id="select-all" name="applicants"></th>
+                    {% endif %}
+                    <th>S/No</th>
+                    <th>Name</th>
+                    <th>Level</th>
+                    <th>Family Status</th>
+                    <th>Subcounty</th>
+                    <th>Ward</th>
+                    <th>Contact</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    {% for application in filter.qs %}
+                    <tr>
+                        {% if user.is_superuser and not successful %}
+                        <td><input type="checkbox" name="selected_candidates" value="{{application.id}}"></td>
+                        {% endif %}
+                        <td>{{forloop.counter}}</td>
+                        <td>{{application.full_name}}</td>
+                        <td>{{application.level}}</td>
+                        <td>{{application.get_family_status_display}}</td>
+                        <td>{{application.subcounty}}</td>
+                        <td>{{application.ward}}</td>
+                        <td>{{application.contact_of_guardian}}</td>
+                        <td>
+                            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">                
+                                <i class="fas fa-ellipsis-v"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <button type="button" class="view-details dropdown-item btn-sm" data-id="{% url 'application-details' application.pk %}"> 
+                                    <i class="fas fa-eye"></i> View Details
+                                </button>                               
+                            </div>  
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
+{% block customjs %}
+<script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+<script src="{% static 'js/load_ajax_results.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.min.js"></script>
+<script src="{% static 'js/pdf.js' %}"></script>
+
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script>
+    $(document).ready(function() {
+        {% if recommended %}
+            $('#recommendations-link').addClass('active');
+            {% elif successful %}
+            $('#successful-link').addClass('active');
+            {% else %}
+            $('#applications-link').addClass('active');
+        {% endif %}
+        $('input#select-all').click(function (event) {          
+		    var selected = this.checked;
+		    $(':checkbox').each(function () { this.checked = selected; });		    
+		});
+        $('#table').dataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                { extend: 'copy', text: 'Copy to clipboard' },
+                { extend: 'excel', text: 'Export to Excel' },
+                { extend: 'csv', text: 'Export to CSV' },
+                { extend: 'pdf', text: 'Export to PDF' },
+                
+            ]
+        });
+        $(".view-details").each(function () {
+            $(this).modalForm({
+              formURL: $(this).data('id')
+            });
+        });
+
+        if ($("input:checkbox:checked").length <= 0)
+		{
+		    $('#approve-link').hide();
+		}
+
+		$('input#select-all').click(function (event) {          
+		    var selected = this.checked;
+		    $(':checkbox').each(function () { this.checked = selected; });
+		    
+		});
+
+		$(':checkbox').change(function() {
+			if ($(":checkbox:checked").length <= 0)
+			{
+			    $('#approve-link').hide();
+			}
+			else {$('#approve-link').show();}
+		})
+
+        $('#approve-link').click(function (){
+            var approval_url = $(this).attr("data-url");
+            var markedCheckboxes = $('input[name="selected_candidates"]'); 
+            var application_ids = [];
+            for (var checkbox of markedCheckboxes) {  
+                if (checkbox.checked) {
+                    application_ids.push(checkbox.value);
+                } 
+            }
+            console.log(application_ids);
+
+            $.ajax({
+                url: approval_url,
+                data: {
+                    'application_ids' : JSON.stringify(application_ids)
+                },
+                dataType: 'json',                
+                success: function (data) {
+                    window.location = data.url;
+                }
+                
+            });location
+        });
+
+    });
+</script>
+{% endblock customjs %}

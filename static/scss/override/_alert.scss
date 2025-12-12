@@ -1,0 +1,119 @@
+.alert {
+  color: #fff;
+  border: none;
+  padding: 15px 20px;
+  .alert-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  code {
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 1px 4px;
+  }
+  p {
+    margin-bottom: 0;
+  }
+  &.alert-has-icon {
+    display: flex;
+    .alert-icon {
+      margin-top: 4px;
+      width: 30px;
+      .ion, .fas, .far, .fab, .fal {
+        font-size: 50px;
+      }
+    }
+    .alert-body {
+      flex: 1;
+      margin-left: 4%;
+    }
+  }
+  &:not(.alert-light) a {
+    color: #fff;
+  }
+  &.alert-primary {
+    background-color: color(primary);
+  }
+
+  &.alert-outline-primary {
+    border: 1px solid color(primary);
+    color: color(primary);
+    background-color: #fff;
+  }
+
+  &.alert-secondary {
+    background-color: color(secondary);
+  }
+
+  &.alert-outline-secondary {
+    border: 1px solid color(secondary);
+    color: color(secondary);
+    background-color: #fff;
+  }
+
+  &.alert-success {
+    background-color: color(success);
+  }
+
+  &.alert-outline-success {
+    border: 1px solid color(success);
+    color: color(success);
+    background-color: #fff;
+  }
+
+  &.alert-info {
+    background-color: color(info);
+  }
+
+  &.alert-outline-info {
+    border: 1px solid color(info);
+    color: color(info);
+    background-color: #fff;
+  }
+
+  &.alert-warning {
+    background-color: color(warning);
+  }
+
+  &.alert-outline-warning {
+    border: 1px solid color(warning);
+    color: color(warning);
+    background-color: #fff;
+  }
+
+  &.alert-danger {
+    background-color: color(danger);
+  }
+
+  &.alert-outline-danger {
+    border: 1px solid color(danger);
+    color: color(danger);
+    background-color: #fff;
+  }
+
+  &.alert-light {
+    background-color: color(light);
+    color: color(dark);
+  }
+
+  &.alert-outline-light {
+    border: 1px solid color(light);
+    color: color(light);
+    background-color: #fff;
+  }
+
+  &.alert-dark {
+    background-color: color(dark);
+  }
+
+  &.alert-outline-dark {
+    border: 1px solid color(dark);
+    color: color(dark);
+    background-color: #fff;
+  }
+
+  &.alert-rounded {
+    border-radius: 10px;
+  }
+}

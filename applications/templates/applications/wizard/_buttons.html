@@ -1,0 +1,40 @@
+<div>	
+	<div class="float-left">
+		{% if wizard.steps.prev %}
+			<button name="wizard_goto_step" class="btn btn-outline-dark btn-lg my-2" type="submit" value="{{ wizard.steps.first }}" formnovalidate="formnovalidate">
+				<i class="fas fa-chevron-left"></i><i class="fas fa-chevron-left"></i>
+				&nbsp;
+				First
+			</button>
+			<button name="wizard_goto_step" class="btn btn-outline-dark btn-lg my-2" type="submit" value="{{ wizard.steps.prev }}" formnovalidate="formnovalidate">
+				<i class="fas fa-chevron-left"></i>
+				&nbsp;
+				Previous
+			</button>
+		{% endif %}
+	</div>
+	<div class="float-right">
+		{% if wizard.steps.next %}
+			
+			{% if skippable %}					
+				<button type="submit" class="btn btn-outline-primary btn-lg my-2" value="Next" formnovalidate>
+					<i class="fas fa-chevron-right"></i>
+					&nbsp;
+					Skip
+				</button>
+			{% endif %}			
+			<button type="submit" class="btn btn-outline-primary btn-lg my-2" value="Next">
+				<i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i>
+				&nbsp;
+				Next
+			</button>
+			
+		{% else %}
+			<button type="submit" class="btn btn-primary btn-lg my-2" value="Submit">
+				<i class="fas fa-check-circle"></i>
+				&nbsp;
+				Submit
+			</button>
+		{% endif %}
+	</div>
+</div>

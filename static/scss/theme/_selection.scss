@@ -1,0 +1,6 @@
+::selection {
+  background: color(primary) !important; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: color(primary) !important; /* Gecko Browsers */
+}

@@ -1,0 +1,64 @@
+{% extends "layout/auth_layout.html" %}
+{% load static %}
+{% load i18n %}
+{% load account %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<div class="card card-primary shadow">
+  <div class="card-header border-bottom"><h4>Login Below</h4></div>
+  <div class="card-body">
+    <form method="POST" action="{% url 'account_login' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}" class="login-form">
+      {% csrf_token %}
+      {% crispy form %}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <button class="btn btn-primary btn-lg btn-block" type="submit">{% trans "Sign In" %}</button>
+    </form>
+  </div>
+</div>
+<div class="text-muted text-center">  
+  <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
+  &nbsp;
+  <span>|</span>
+  &nbsp;
+  Don't have an account? {% if 'next' in request.get_full_path %}<a href="{% url 'account_signup' %}?next={{request.GET.next}}">Create One</a>{% else %}<a href="{% url 'account_signup' %}">Create One</a>{% endif %}
+</div>
+
+{% endblock %}
+{% block extra_head %}  
+{% endblock extra_head %}
+{% block customjs %}
+<script>
+  $(document).ready(function () {
+    $('.alert-block').prepend('\
+      <button type="button" class="close alert-btn text-white" data-dismiss="alert" aria-label="Close">\
+        <span aria-hidden="true">&times;</span>\
+      </button>'
+    );
+    $('#eye').css('cursor', 'pointer');
+    $('input[placeholder], textarea[placeholder]').placeholderLabel();
+    
+    $('#id_login').keyup(function() {
+      this.value = this.value.toLowerCase();
+    });
+  });
+
+  function showHidePwd() {
+    var input = document.getElementById("id_password");
+    if (input.type === "password") {
+        input.type = "text";
+        document.getElementById("eye").className = "fas fa-eye";
+    } else {
+        input.type = "password";
+        document.getElementById("eye").className = "fas fa-eye-slash";
+    }
+  }
+
+
+</script>
+
+{% endblock customjs %}

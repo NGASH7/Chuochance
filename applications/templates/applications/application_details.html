@@ -1,0 +1,116 @@
+{% load widget_tweaks %}
+
+<div class="modal-header">
+  <h3 class="modal-title">Application details for {{application.full_name|title}}</h3>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" id="pills-details-tab" data-toggle="pill" href="#pills-details" role="tab" aria-controls="pills-details" aria-selected="true">Applicant's Details</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="pills-documents-tab" data-toggle="pill" href="#pills-documents" role="tab" aria-controls="pills-documents" aria-selected="false">Documents</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-details" role="tabpanel" aria-labelledby="pills-details-tab">
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Full Name</td>
+              <td>{{ application.full_name }} ( Generated Score: {{application.score}}/10 )</td>
+            </tr>
+            <tr>
+              <td>ID Number Provided</td>
+              <td>{{ application.id_number }}</td>
+            </tr>
+            <tr>
+              <td>Disability Status</td>
+              <td>{{ application.disability_status }}</td>
+            </tr>
+            <tr>
+              <td>Family Status</td>
+              <td>{{ application.get_family_status_display }}</td>
+            </tr>
+            <tr>
+              <td>School</td>
+              <td>{{ application.school_name }} ({{application.level}})</td>
+            </tr>
+            <tr>
+              <td>Adm/Reg Number</td>
+              <td>{{ application.admission_number }}</td>
+            </tr>
+            <tr>
+              <td>Subcounty</td>
+              <td>{{ application.subcounty }}</td>
+            </tr>
+            <tr>
+              <td>Ward</td>
+              <td>{{ application.ward }}</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-documents" role="tabpanel" aria-labelledby="pills-documents-tab">
+      {% if application.school_recommendation_letter %}
+        <input type="hidden" id="school_recommendation" value="{{application.school_recommendation_letter.url}}">
+      {% endif %}
+      {% if application.death_cert_father %}
+        <input type="hidden" id="death_cert_father" value="{{application.death_cert_father.url}}">
+      {% endif %}
+      {% if application.death_cert_mother %}
+        <input type="hidden" id="death_cert_mother" value="{{application.death_cert_mother.url}}">
+      {% endif %}
+      {% if not application.school_recommendation_letter and not application.death_cert_father and not application.death_cert_mother %}
+          <p class="lead">No documents to show for this applicant.</p>
+      {% endif %}
+      
+      <div class="container">
+        {% if application.school_recommendation_letter %}
+          <div id="div_school_recommendation">
+            <h5>School Recommendation Letter</h5>
+            <div class="buttons">
+              <button id="previous_school" class="previous btn btn-sm btn-outline-default"><i class="fas fa-chevron-left"></i> Previous Page</button>
+              <small id="school_pageNumber" class="mt-n3">Page 1 of 1</small> &nbsp;
+              <button id="next_school" class="next btn btn-sm btn-outline-default">Next Page <i class="fas fa-chevron-right"></i></button>
+            </div>
+            <canvas id="school_canvas" style="border: solid 1px #333;width: 100%;"></canvas>
+          </div>
+        {% endif %}
+        {% if application.death_cert_father %}
+          <div id="div_death_cert_father">
+            <h5>Father's Death Certificate</h5>
+            <div class="buttons">
+              <button id="previous_father" class="previous btn btn-sm btn-outline-default"><i class="fas fa-chevron-left"></i> Previous Page</button>
+              <small id="father_pageNumber" class="mt-n3">Page 1 of 1</small> &nbsp;
+              <button id="next_father" class="next btn btn-sm btn-outline-default">Next Page <i class="fas fa-chevron-right"></i></button>
+            </div>
+            <canvas id="father_canvas" style="border: solid 1px #333;width: 100%;"></canvas>
+          </div>
+        {% endif %}
+        {% if application.death_cert_mother %}
+          <div id="div_death_cert_mother">
+            <h5>Mother's Death Certificate</h5>
+            <div class="buttons">
+              <button id="previous_mother" class="previous btn btn-sm btn-outline-default"><i class="fas fa-chevron-left"></i> Previous Page</button>
+              <span id="mother_pageNumber">Page 1 of 1</span> &nbsp;
+              <button id="next_mother" class="next btn btn-sm btn-outline-default">Next Page <i class="fas fa-chevron-right"></i></button>
+            </div>
+            <canvas id="mother_canvas" style="border: solid 1px #333;width: 100%;"></canvas>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+</div>

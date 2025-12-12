@@ -1,0 +1,22 @@
+<div class="wizard-steps">
+    {% for step in wizard_steps %}
+        <div class="wizard-step 
+          {% if forloop.counter == wizard.steps.step1 %}
+            wizard-step-info
+            {% elif forloop.counter < wizard.steps.step1 %}
+            wizard-step-active
+          {% endif %}
+          {% if not forloop.counter == wizard.steps.step1 %}d-none d-lg-block{% endif %}"
+        >
+          <div class="wizard-step-icon">
+            <i class="{{step.wizard_icon}}"></i>
+          </div>
+          <div class="wizard-step-label">
+            {{step.wizard_title}}
+            <br>
+            {% if forloop.counter < wizard.steps.step1 %}(<i class="fas fa-check-circle"></i> Complete){% endif %}
+          </div>
+        </div>
+    {% endfor %}
+</div>
+  

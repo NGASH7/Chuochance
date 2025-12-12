@@ -1,0 +1,33 @@
+{% extends "layout/auth_layout.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Out" %}{% endblock %}
+
+{% block content %}
+<div class="card card-primary shadow">
+	<div class="card-header border-bottom"><h4>Sign Out</h4></div>
+  	<div class="card-body">
+		<p>{% trans 'Are you sure you want to sign out?' %}</p>
+
+		<form method="post" action="{% url 'account_logout' %}">
+		  {% csrf_token %}
+		  {% if redirect_field_value %}
+		  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+		  {% endif %}
+		  <div class="row">
+		  	<div class="col-md-6 my-2">
+		  		<button type="submit" class="btn btn-primary"><i class="fas fa-sign-out-alt">&nbsp;</i>{% trans 'Yes, Sign Out' %}</button>		  		
+		  	</div>
+		  	<div class="col-md-6 my-2">
+		  		<a href="{{request.META.HTTP_REFERER}}" class="btn btn-success"><i class="fas fa-chevron-circle-left">&nbsp;</i>{% trans 'Take Me Back' %}</a>		  		
+		  	</div>
+		  </div>
+		</form>  		
+	</div>
+</div>
+
+<script>
+	$('#sign_out_link').addClass('active');
+</script>
+{% endblock %}

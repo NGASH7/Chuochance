@@ -1,0 +1,50 @@
+{% extends "layout/layout.html" %}
+{% load static %}
+{% load humanize %}
+{% block section_header %}
+<section class="section-header d-lg-none text-center">
+  <h1>{{user.get_full_name}}</h1>
+</section>
+<section class="section-header">    
+  <span class="h4 font-weight-bolder"><span>Welcome, </span>{{user.get_full_name}}</span>
+</section>
+{% endblock section_header %}
+{% block content %}
+<div class="row">
+  {% if user.current_application %}
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+      <div class="card card-statistic-1">
+        <div class="card-icon bg-danger">
+          <i class="fas fa-fire"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h5>Application - Year {{user.current_application.period.year}} </h5>
+          </div>
+          <div class="card-body">
+            <small class="text-muted">
+              Submitted {{user.current_application.submitted_at}}
+            </small>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="#">View Application <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="card">
+      <div class="card-body">
+        <p class="lead">Applications are currently open for the Year {{current_period.year}}. Simply <a href="#" class="bb">apply</a> to be considered for the bursary this year</p> 
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock content %}
+{% block customjs %}
+<script>
+  $(document).ready(function (){
+      $('#dashboard-link').addClass('active');
+  })
+</script>
+{% endblock customjs %}

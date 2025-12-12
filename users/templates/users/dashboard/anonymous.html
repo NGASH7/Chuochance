@@ -1,0 +1,40 @@
+{% extends "layout/layout.html" %}
+{% load static %}
+{% load humanize %}
+{% block section_header %}
+<section class="section-header d-lg-none text-center">
+  <h1>CHUOCHANCE BURSARY PORTAL</h1>
+</section>
+{% endblock section_header %}
+{% block content %}
+<div class="container">
+    <div>
+      <h1 class="mb-3">CHUOCHANCE BURSARY PORTAL</h1>
+      <div class="row">
+        <div class="col-md-9">
+          <div class="my-3">
+            <p class="lead">We invest in our county's potential, not background. Our bursaries unlock local futures, ensuring every dedicated student can learn and lead here.</p>
+            <p class="lead">You can either submit a <a href="#" class="bb">One time application</a>, or <a href="{% url 'account_signup' %}" class="bb">Create an account</a> if you wish to be applying yearly.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <p>Search for your application by ID Number below</p>          
+          <form action="{% url 'search-application' %}" method="get" class="form-inline">
+            <div class="form-group mb-2">
+              <label for="search" class="sr-only">Password</label>
+              <input type="search" name="id_number" id="search" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Search</button>
+          </form>
+        </div>        
+      </div>
+    </div>
+</div>
+{% endblock content %}
+{% block customjs %}
+
+<script>
+  $('#dashboard-link').addClass('active');
+  
+</script>
+{% endblock customjs %}

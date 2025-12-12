@@ -1,0 +1,73 @@
+{% extends "layout/staff_layout.html" %}
+{% load static %}
+{% load humanize %}
+{% block section_header %}
+<section class="section-header">
+  <h1>CHUOCHANCE BURSARY PORTAL</h1>
+</section>
+{% endblock section_header %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+    <div class="card card-statistic-1">
+      <div class="card-icon bg-info">
+        <i class="fas fa-users"></i>
+      </div>
+      <div class="card-wrap">
+        <div class="card-header">
+          <h5>Applications</h5>
+        </div>
+        <div class="card-body">
+          {{total_applications}}
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'applications-list' %}">View Applications <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+    <div class="card card-statistic-1">
+      <div class="card-icon bg-success">
+        <i class="fas fa-user-check"></i>
+      </div>
+      <div class="card-wrap">
+        <div class="card-header">
+          <h5>Recommended</h5>
+        </div>
+        <div class="card-body">
+          {{recommended_applications}}
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'recommended-list' %}">View Recommended <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+    <div class="card card-statistic-1">
+      <div class="card-icon bg-danger">
+        <i class="fas fa-stopwatch"></i>
+      </div>
+      <div class="card-wrap">
+        <div class="card-header">
+          <h5>Closing Date</h5>
+        </div>
+        <div class="card-body">
+          <small class="text-muted">{{current_period.end_date|naturalday}}</small>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>{{current_period.end_date|naturaltime}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block customjs %}
+<script>
+  $(document).ready(function (){
+      $('#dashboard-link').addClass('active');
+  })
+</script>
+{% endblock customjs %}
